@@ -1,6 +1,10 @@
 import { Schema, model } from "mongoose";
 
 const channelSchema = new Schema({
+  userid: {
+    type: String,
+    unique: true,
+  },
   channelName: {
     type: String,
     required: true,
@@ -23,5 +27,4 @@ const channelSchema = new Schema({
     default: Date.now,
   },
 });
-
 export const channelModel = model("channel", channelSchema);

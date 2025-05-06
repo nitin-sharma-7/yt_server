@@ -20,7 +20,7 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
     lowercase: true,
-    match: [/.+\@.+\..+/, "Please enter a valid email address"],
+    // match: [/.+\@.+\..+/, "Please enter a valid email address"],
   },
   avatar: {
     type: String,

@@ -1,14 +1,26 @@
 import { channelModel } from "../models/channelModel.js";
+
+const getChannel = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const channel = await channelModel.findById(id);
+
+    res.status(200).json(channel);
+  } catch (error) {
+    console.error("Error in finding channel:", error.message);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
 const createChannel = async (req, res, next) => {
   try {
     // Extract cart item data from request body
     const channel = req.body;
 
     // Create and save new cart item in the database
-    await channelModel.create(channel);
+    const { _doc } = await channelModel.create(channel);
 
     // Send success response with status code 201 (Created)
-    res.status(201).json({ message: "channel created sucessfully ", channel });
+    res.status(201).json({ channelState: true, newchannel: _doc });
   } catch (error) {
     // Log and handle server error
     console.error("Error in creating channel:", error.message);
@@ -44,4 +56,4 @@ const deleteChannel = async (req, res) => {
   }
 };
 
-export { updateChannel, deleteChannel, createChannel };
+export { updateChannel, deleteChannel, createChannel, getChannel };

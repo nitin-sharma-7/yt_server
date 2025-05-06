@@ -6,10 +6,12 @@ const registerUser = async (req, res) => {
     const user = req.body;
 
     // Create new user document in the database
-    await userModel.create(user);
+    const newUser = await userModel.create(user);
 
     // Send success response with created user data
-    res.status(201).json({ message: "User successfully added", user });
+    res
+      .status(201)
+      .json({ state: true, message: "User successfully added", newUser });
   } catch (error) {
     // Log the error and return server error response
     console.error("Error registering user:", error.message);

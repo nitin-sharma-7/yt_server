@@ -20,7 +20,8 @@ const userVerify = async (req, res, next) => {
     }
 
     const token = generateJWT(username, process.env.SECRET_KEY);
-    return res.json({ token });
+    const [newuser] = data;
+    return res.json({ loginState: true, newuser, token });
   } catch (error) {
     console.log("error", error);
     return res.status(500).json({ error: "server error occured" });
