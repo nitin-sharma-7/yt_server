@@ -1,30 +1,47 @@
 import { Schema, model } from "mongoose";
 
 const channelSchema = new Schema({
-  userid: {
-    type: String,
-    unique: true,
-  },
   channelName: {
     type: String,
     required: true,
     unique: true,
-  },
-  handle: {
-    type: String,
+    trim: true,
   },
   description: {
     type: String,
+    trim: true,
   },
-  channelBanner: {
-    type: String,
+  // Reference to the user who owns this channel
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+    unique: true,
   },
   avatar: {
     type: String,
+    default: "https://cdn-icons-png.flaticon.com/128/2888/2888404.png",
   },
+  channelBanner: {
+    type: String,
+    default: "https://cdn-icons-png.flaticon.com/128/2888/2888404.png",
+  },
+  subscribers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
+  videos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "video",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
+
 export const channelModel = model("channel", channelSchema);

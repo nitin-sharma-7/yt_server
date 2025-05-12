@@ -1,5 +1,5 @@
 import { userModel } from "../models/userModel.js";
-
+import { channelModel } from "../models/channelModel.js";
 const registerUser = async (req, res) => {
   try {
     // Extract user data from request body
@@ -18,5 +18,9 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-
-export { registerUser };
+const getUser = async (req, res) => {
+  const _id = req.params.id;
+  const newUser = await userModel.find().populate("channel");
+  res.json(newUser);
+};
+export { registerUser, getUser };

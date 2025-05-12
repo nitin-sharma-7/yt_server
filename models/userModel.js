@@ -24,8 +24,12 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    trim: true,
     default: "https://cdn-icons-png.flaticon.com/128/9512/9512683.png",
+  },
+  // Add a reference to channels created by this user
+  channel: {
+    type: Schema.Types.ObjectId,
+    ref: "channel",
   },
   createdAt: {
     type: Date,

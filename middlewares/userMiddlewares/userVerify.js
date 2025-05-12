@@ -13,7 +13,9 @@ const userVerify = async (req, res, next) => {
       return res.status(400).json({ errors });
     }
 
-    const data = await userModel.find({ username, password });
+    const data = await userModel
+      .find({ username, password })
+      .populate("channel");
 
     if (!data || data.length == 0) {
       return res.status(400).json({ messsage: "user not found" });

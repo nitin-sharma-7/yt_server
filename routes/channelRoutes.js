@@ -6,12 +6,16 @@ import {
   deleteChannel,
   updateChannel,
   getChannel,
+  subscribeToChannel,
 } from "../controllers/channelController.js";
 
 const router = Router();
 
 router.get("/channel/:id", getChannel);
+
 router.post("/channel", jwtAtuh, channelValidate, createChannel);
+router.post("/channel/subscribe", jwtAtuh, subscribeToChannel);
+
 router.put("/channel", jwtAtuh, channelValidate, updateChannel);
 router.delete("/channel", jwtAtuh, deleteChannel);
 

@@ -1,21 +1,6 @@
 import { Schema, model } from "mongoose";
-// Define Comment Schema with user avatar and user name
-// const CommentSchema = new Schema({
-//   id: String,
-//   text: String,
-//   likeCount: Number,
-//   publishedAt: Date,
-//   // Original author fields
-//   authorDisplayName: String,
-//   authorProfileImageUrl: String,
-//   // New user fields
-//   userName: String,
-//   userAvatar: String,
-// });
 
-// Define YouTube Video Schema
 const videoSchema = new Schema({
-  id: String,
   snippet: {
     publishedAt: Date,
     channelId: String,
