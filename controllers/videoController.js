@@ -2,8 +2,11 @@ import { videoModel } from "../models/videoModel.js";
 
 const getVideos = async (req, res, next) => {
   try {
-    const videos = await videoModel.find();
-
+    const videos = await videoModel
+      .find()
+      .populate({ path: "comments", populate: { path: "owner" } })
+      .populate("snippet.channelId")
+      .populate("statistics.likeCount");
     res.status(200).json(videos);
   } catch (error) {
     next(error);

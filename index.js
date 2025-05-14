@@ -7,6 +7,7 @@ import "dotenv/config";
 import { statusLogger } from "./middlewares/statusLogger.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import cors from "cors";
+import commentRouter from "./routes/commentRoutes.js";
 // import { send } from "./database/sendvideo.js";
 
 //
@@ -23,6 +24,7 @@ app.use(statusLogger);
 app.use(userRouter);
 app.use(channelRouter);
 app.use(videoRouter);
+app.use(commentRouter);
 
 //
 app.use(errorHandler);

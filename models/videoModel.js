@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const videoSchema = new Schema({
   snippet: {
     publishedAt: Date,
-    channelId: String,
+    channelId: { type: Schema.Types.ObjectId, ref: "channel" },
     title: String,
     description: String,
     thumbnails: {

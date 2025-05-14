@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { jwtAtuh } from "../jwt/userJWT.js";
-import { commentValidate } from "../middlewares/comment/commentValidate.js";
+import { postComment } from "../controllers/commentControler.js";
 
 const router = Router();
 
-router.post("/comment/create", jwtAtuh, commentValidate);
+router.post("/comment/create", jwtAtuh, postComment);
+
+export default router;
