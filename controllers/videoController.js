@@ -3,19 +3,43 @@ import { videoModel } from "../models/videoModel.js";
 const getVideos = async (req, res, next) => {
   try {
     const videos = await videoModel.find();
+
     res.status(200).json(videos);
   } catch (error) {
     next(error);
   }
 };
 
-const postVideo = async (req, res, next) => {
+const postVideo = async (req, res) => {
   try {
-    const video = req.body;
-    await videoModel.create(video);
-    res.status(200).json(video);
+    let { title, description, maxres, tags, duration, videoLink } =
+      req.body.formattedVideo;
+    let { channelId, channelTitle } = req.body;
+    const video = {
+      snippet: {
+        channelId,
+        title,
+        description,
+        thumbnails: {
+          default: {
+            url: maxres,
+          },
+          maxres: {
+            url: maxres,
+          },
+        },
+        channelTitle,
+        tags,
+      },
+      contentDetails: {
+        duration,
+      },
+      videoLink,
+    };
+    const newVideo = await videoModel.create(video);
+    res.status(200).json(newVideo);
   } catch (error) {
-    next(error);
+    res.status(500).json(error.message);
   }
 };
 

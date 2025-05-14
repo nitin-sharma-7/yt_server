@@ -5,12 +5,13 @@ import {
   postVideo,
   updateVideo,
 } from "../controllers/videoController.js";
+import { jwtAtuh } from "../jwt/userJWT.js";
 
 const router = Router();
 
 router.get("/videos", getVideos);
-router.post("/videos", postVideo);
-router.delete("/videos", deleteVideo);
-router.put("/videos", updateVideo);
+router.post("/video", jwtAtuh, postVideo);
+router.delete("/video", jwtAtuh, deleteVideo);
+router.put("/video", jwtAtuh, updateVideo);
 
 export default router;

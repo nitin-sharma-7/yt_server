@@ -9,40 +9,31 @@ const videoSchema = new Schema({
     thumbnails: {
       default: {
         url: String,
-        width: Number,
-        height: Number,
       },
       maxres: {
         url: String,
-        width: Number,
-        height: Number,
       },
     },
     channelTitle: String,
     tags: [String],
-    defaultAudioLanguage: String,
   },
   contentDetails: {
     duration: String,
   },
   statistics: {
     viewCount: String,
-    likeCount: String,
+    likeCount: [{ type: Schema.Types.ObjectId, ref: "user" }],
     favoriteCount: String,
     commentCount: String,
-    subscribers: String,
   },
   videoLink: String,
   comments: [
     {
-      id: String,
-      text: String,
-      likeCount: Number,
-      publishedAt: Date,
-      userName: String,
-      userAvatar: String,
+      type: Schema.Types.ObjectId,
+      ref: "comment",
     },
   ],
+  createdAT: { type: Date, default: Date.now },
 });
 
 // Create model
