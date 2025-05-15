@@ -1,3 +1,4 @@
+import { channelModel } from "../models/channelModel.js";
 import { videoModel } from "../models/videoModel.js";
 
 const getVideos = async (req, res, next) => {
@@ -40,6 +41,9 @@ const postVideo = async (req, res) => {
       videoLink,
     };
     const newVideo = await videoModel.create(video);
+    const channel = await channelModel.findById(channelId);
+    channel.videos.push(newVideo._id);
+    await channel.save();
     res.status(200).json(newVideo);
   } catch (error) {
     res.status(500).json(error.message);

@@ -1,9 +1,9 @@
 import { Schema, model } from "mongoose";
 const commentSchema = Schema({
   comment: { type: String },
-  owner: { type: Schema.Types.ObjectId, ref: "user" },
+  owner: { type: Schema.Types.ObjectId, ref: "user", unique: true },
+  likes: [{ type: Schema.Types.ObjectId, ref: "user", unique: true }],
   createdAt: { type: Date, default: Date.now },
 });
 
-const commentModel = model("comment", commentSchema);
-export { commentModel };
+export const commentModel = model("comment", commentSchema);

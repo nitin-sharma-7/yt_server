@@ -22,7 +22,7 @@ const videoSchema = new Schema({
   },
   statistics: {
     viewCount: String,
-    likeCount: [{ type: Schema.Types.ObjectId, ref: "user" }],
+    likeCount: [{ type: Schema.Types.ObjectId, ref: "user", unique: true }],
     favoriteCount: String,
     commentCount: String,
   },
@@ -33,7 +33,7 @@ const videoSchema = new Schema({
       ref: "comment",
     },
   ],
-  createdAT: { type: Date, default: Date.now },
+  publishedAt: { type: Date, default: Date.now },
 });
 
 // Create model

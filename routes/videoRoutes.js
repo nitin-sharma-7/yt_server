@@ -10,6 +10,7 @@ import { jwtAtuh } from "../jwt/userJWT.js";
 const router = Router();
 
 router.get("/videos", getVideos);
+
 router.post("/video", jwtAtuh, postVideo);
 router.delete("/video", jwtAtuh, deleteVideo);
 router.put("/video", jwtAtuh, updateVideo);

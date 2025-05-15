@@ -16,6 +16,7 @@ const channelSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
     required: true,
+    unique: true,
   },
   avatar: {
     type: String,
@@ -25,10 +26,13 @@ const channelSchema = new Schema({
     type: String,
     default: "https://cdn-icons-png.flaticon.com/128/2888/2888404.png",
   },
-  subscribers: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-  },
+  subscribers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      unique: true,
+    },
+  ],
 
   videos: [
     {

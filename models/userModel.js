@@ -30,6 +30,7 @@ const userSchema = new Schema({
   channel: {
     type: Schema.Types.ObjectId,
     ref: "channel",
+    unique: true,
   },
   createdAt: {
     type: Date,

@@ -4,7 +4,7 @@ import { userModel } from "../models/userModel.js";
 const getChannel = async (req, res) => {
   try {
     const id = req.params.id;
-    const channel = await channelModel.findById(id);
+    const channel = await channelModel.findById(id).populate("videos");
 
     res.status(200).json(channel);
   } catch (error) {
