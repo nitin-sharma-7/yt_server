@@ -1,9 +1,15 @@
 import { userModel } from "../models/userModel.js";
-import { channelModel } from "../models/channelModel.js";
+import bcrypt from "bcrypt";
 const registerUser = async (req, res) => {
   try {
     // Extract user data from request body
-    const user = req.body;
+    const { username, email, avatar, password } = req.body;
+    const user = {
+      username,
+      email,
+      avatar,
+      password: bcrypt.hashSync(password, 10),
+    };
 
     // Create new user document in the database
     const newUser = await userModel.create(user);
