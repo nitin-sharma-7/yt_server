@@ -15,7 +15,6 @@ const channelSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user",
-    unique: true,
   },
   avatar: {
     type: String,
@@ -29,7 +28,6 @@ const channelSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "user",
-      unique: true,
     },
   ],
 

@@ -22,7 +22,7 @@ const videoSchema = new Schema({
   },
   statistics: {
     viewCount: String,
-    likeCount: [{ type: Schema.Types.ObjectId, ref: "user", unique: true }],
+    likeCount: [{ type: Schema.Types.ObjectId, ref: "user" }],
     favoriteCount: String,
     commentCount: String,
   },
