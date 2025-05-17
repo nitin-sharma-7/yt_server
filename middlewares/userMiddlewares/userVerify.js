@@ -8,12 +8,12 @@ const userVerify = async (req, res, next) => {
     const data = await userModel.find({ username }).populate("channel");
     // const data = await userModel.find({ username });
     if (!data || data.length == 0) {
-      return next("user not found");
-      // return res.status(400).json({ messsage: "user not found" });
+      return res
+        .status(404)
+        .json({ usernotfound: false, messsage: "user not found" });
     }
     const [newuser] = data;
     const validation = bcrypt.compareSync(password, newuser.password);
-
     if (validation) {
       const token = generateJWT(username, process.env.SECRET_KEY);
 
