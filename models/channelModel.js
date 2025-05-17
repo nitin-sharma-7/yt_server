@@ -15,7 +15,6 @@ const channelSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user",
-    required: true,
     unique: true,
   },
   avatar: {
