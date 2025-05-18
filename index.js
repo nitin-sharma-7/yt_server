@@ -8,27 +8,31 @@ import { statusLogger } from "./middlewares/statusLogger.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import cors from "cors";
 import commentRouter from "./routes/commentRoutes.js";
-// import { send } from "./database/sendvideo.js";
+// import { send } from "./database/sendvideo.js";  // Commented out database video sender
 
-//
+// Initialize Express application
 const app = express();
 
+// Connect to MongoDB database using the URL from environment variables or fallback to localhost
 connectDB(process.env.MONGO_URL || "mongodb://localhost:27017");
-//
-app.use(cors());
-app.use(express.json());
-app.use(statusLogger);
 
-//
-// send();
-app.use(userRouter);
-app.use(channelRouter);
-app.use(videoRouter);
-app.use(commentRouter);
+// Middleware setup
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json()); // Parse JSON request bodies
+app.use(statusLogger); // Log HTTP request status
 
-//
+// Route setup
+// send();  // Commented out video sender function
+app.use(userRouter); // Mount user-related routes
+app.use(channelRouter); // Mount channel-related routes
+app.use(videoRouter); // Mount video-related routes
+app.use(commentRouter); // Mount comment-related routes
+
+// Error handling middleware (should be last in middleware chain)
 app.use(errorHandler);
-const port = process.env.PORT || 2000;
+
+// Server configuration and startup
+const port = process.env.PORT || 2000; // Use port from environment variables or default to 2000
 app.listen(port, () => {
   console.log(`server is runnign at port ${port}`);
 });
